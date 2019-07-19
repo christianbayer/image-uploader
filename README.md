@@ -23,10 +23,40 @@ Inside the form, create a wrapper to the plugin:
 ```
 <div class="input-images"></div>
 ```
-Initialize 
+Initialize it with jQuery 
 ```
 $('.input-images').imageUploader();
 ```
+
+## Options
+
+#### label
+Type: `string`
+
+Default: `'Drag & Drop files here or click to browse'`
+
+Informative label, telling the user what to do with the draggable area.
+
+#### preloaded
+Type: `{id: number, src: string}[]`
+
+Default: `[]`
+
+Array of objects representing images that are already stored, containing an identification for that image and the source.
+
+#### imagesInputName
+Type: `string`
+
+Default: `'images'`
+
+Name of the input that will be posted, containing the files list.
+
+#### preloaded
+Type: `string`
+
+Default: `'preloaded'`
+
+Name of the inputs that will be posted, containing the preloaded images identification.
 
 ## License
 
