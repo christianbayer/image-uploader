@@ -48,7 +48,7 @@
 
         header p {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.2em;
             font-weight: 200;
             margin-bottom: 4rem;
         }
@@ -69,7 +69,7 @@
         footer p {
             text-align: center;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
+            font-size: 1em;
             font-weight: 200;
             margin: 0;
         }
@@ -87,17 +87,17 @@
         }
 
         h1 {
-            font-size: 3.6rem;
+            font-size: 3.6em;
             margin: 4rem 0 1rem 0;
         }
 
         h4 {
-            font-size: 2rem;
+            font-size: 2em;
             margin: 3rem 0 1rem 0;
         }
 
         h6 {
-            font-size: 1.2rem;
+            font-size: 1.2em;
             margin: 1rem 0;
         }
 
@@ -112,7 +112,7 @@
 
         nav {
             position: absolute;
-            margin-left: -180px;
+            margin-left: -12em;
         }
 
         nav ul {
@@ -125,7 +125,7 @@
         }
 
         nav ul li a {
-            font-size: 1.2rem;
+            font-size: 1.2em;
             font-weight: 400;
             font-family: 'Montserrat', sans-serif;
             color: #2196f3;
@@ -136,14 +136,15 @@
             margin: 1rem 0;
             padding: 1rem 1rem;
             background: #f3f3f3;
-            font-size: .9rem;
+            font-size: .9em;
+            overflow-x: scroll;
         }
 
         table code,
         p code {
             font-family: 'Source Code Pro', monospace;
             background: #f3f3f3;
-            font-size: .9rem;
+            font-size: .9em;
             padding: .1rem .3rem;
         }
 
@@ -163,6 +164,7 @@
             text-transform: uppercase;
             display: block;
             margin: 2rem 0 2rem auto;
+            font-size: 1em;
         }
 
         ul {
@@ -176,7 +178,7 @@
             outline: none;
             width: 100%;
             line-height: normal;
-            font-size: 1rem;
+            font-size: 1em;
             padding: 0;
             -webkit-box-shadow: none;
             box-shadow: none;
@@ -194,7 +196,7 @@
             background-image: -webkit-linear-gradient(#2196f3, #2196f3), -webkit-linear-gradient(#d9d9d9, #d9d9d9);
             background-image: -o-linear-gradient(#2196f3, #2196f3), -o-linear-gradient(#d9d9d9, #d9d9d9);
             background-image: linear-gradient(#2196f3, #2196f3), linear-gradient(#d9d9d9, #d9d9d9);
-            height: 2.4rem;
+            height: 2.4em;
         }
 
         input:focus {
@@ -215,7 +217,7 @@
             top: 0;
             left: 0;
             height: 100%;
-            font-size: 1rem;
+            font-size: 1em;
             cursor: text;
             -webkit-transition: -webkit-transform .2s ease-out;
             transition: -webkit-transform .2s ease-out;
@@ -244,20 +246,21 @@
         }
 
         .container {
+            width: 60%;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
         }
 
         .step {
-            font-size: 1.6rem;
+            font-size: 1.6em;
             font-weight: 600;
             margin-right: .5rem;
         }
 
         .option {
             margin-top: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
+            border-bottom: 1px solid #d9d9d9;
         }
 
         .modal {
@@ -288,6 +291,64 @@
             top: 1rem;
             right: 1rem;
             color: inherit;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        @media screen and (max-width: 1366px) {
+            body {
+                font-size: 15px;
+            }
+
+            nav ul li a {
+                font-size: 1.1em;
+
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            main {
+                margin: 2rem 0;
+            }
+
+            nav {
+                margin-left: -10em;
+            }
+        }
+
+        @media screen and (max-width: 786px) {
+            body {
+                font-size: 14px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .container {
+                width: 80%;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .container {
+                width: 90%;
+            }
         }
     </style>
 </head>
