@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.0.0 - 15/07/2019
+/*! Image Uploader - v1.1.0 - 18/10/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
@@ -10,11 +10,23 @@
             preloaded: [],
             imagesInputName: 'images',
             preloadedInputName: 'preloaded',
-            label: 'Drag & Drop files here or click to browse'
+            label: 'Drag & Drop files here or click to browse',
+            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
+            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+            maxSize: 2 * 1024 * 1024,
+            validateExtension: true,
+            validateMIME: true,
+            validateMaxSize: true,
         };
 
         // Get instance
         let plugin = this;
+
+        // Will keep the files
+        let dataTransfer = new DataTransfer();
+
+        // The file input
+        let $input;
 
         // Set empty settings
         plugin.settings = {};
@@ -59,24 +71,22 @@
 
         };
 
-
-        let dataTransfer = new DataTransfer();
-
         let createContainer = function () {
 
             // Create the image uploader container
-            let $container = $('<div>', {class: 'image-uploader'}),
+            let $container = $('<div>', {class: 'image-uploader'});
 
-                // Create the input type file and append it to the container
-                $input = $('<input>', {
-                    type: 'file',
-                    id: plugin.settings.imagesInputName + '-' + random(),
-                    name: plugin.settings.imagesInputName + '[]',
-                    multiple: ''
-                }).appendTo($container),
+            // Create the input type file and append it to the container
+            $input = $('<input>', {
+                type: 'file',
+                id: plugin.settings.imagesInputName + '-' + random(),
+                name: plugin.settings.imagesInputName + '[]',
+                accept: plugin.settings.extensions.join(','),
+                multiple: ''
+            }).appendTo($container);
 
-                // Create the uploaded images container and append it to the container
-                $uploadedContainer = $('<div>', {class: 'uploaded'}).appendTo($container),
+            // Create the uploaded images container and append it to the container
+            let $uploadedContainer = $('<div>', {class: 'uploaded'}).appendTo($container),
 
                 // Create the text container and append it to the container
                 $textContainer = $('<div>', {
@@ -117,7 +127,7 @@
             e.stopPropagation();
         };
 
-        let createImg = function (src, id) {
+        let createImg = function (src, id, preloaded) {
 
             // Create the upladed image container
             let $container = $('<div>', {class: 'uploaded-image'}),
@@ -131,8 +141,8 @@
                 // Create the delete icon
                 $i = $('<i>', {class: 'material-icons', text: 'clear'}).appendTo($button);
 
-            // If the images are preloaded
-            if (plugin.settings.preloaded.length) {
+            // If the image is preloaded
+            if (preloaded) {
 
                 // Set a identifier
                 $container.attr('data-preloaded', true);
@@ -159,11 +169,12 @@
 
             // Set delete action
             $button.on("click", function (e) {
+
                 // Prevent browser default event and stop propagation
                 prevent(e);
 
                 // If is not a preloaded image
-                if ($container.data('index')) {
+                if ($container.data('index') !== undefined) {
 
                     // Get the image index
                     let index = parseInt($container.data('index'));
@@ -177,6 +188,9 @@
 
                     // Remove the file from input
                     dataTransfer.items.remove(index);
+
+                    // Update input files
+                    $input.prop('files', dataTransfer.files);
                 }
 
                 // Remove this image from the container
@@ -216,14 +230,69 @@
             // Get the jQuery element instance
             let $container = $(this);
 
-            // Change the container style
-            $container.removeClass('drag-over');
+            // Get the files as an array of files
+            let files = Array.from(e.target.files || e.originalEvent.dataTransfer.files);
 
-            // Get the files
-            let files = e.target.files || e.originalEvent.dataTransfer.files;
+            // Will keep only the valid files
+            let validFiles = [];
 
-            // Makes the upload
-            setPreview($container, files);
+            // Run through the files
+            $(files).each(function (i, file) {
+                // Run the validations
+                if (plugin.settings.validateExtension && !validateExtension(file)) {
+                    return;
+                }
+                if (plugin.settings.validateMIME && !validateMIME(file)) {
+                    return;
+                }
+                if (plugin.settings.validateMaxSize && !validateMaxSize(file)) {
+                    return;
+                }
+                validFiles.push(file);
+            });
+
+            // If there is at least one valid file
+            if (validFiles.length) {
+                // Change the container style
+                $container.removeClass('drag-over');
+
+                // Makes the upload
+                setPreview($container, validFiles);
+            }
+        };
+
+        let validateExtension = function (file) {
+
+            if (plugin.settings.extensions.indexOf(file.name.replace(new RegExp('^.*\\.'), '.')) < 0) {
+                alert(`The file "${file.name}" does not match with the accepted file extensions: "${plugin.settings.extensions.join('", "')}"`);
+
+                return false;
+            }
+
+            return true;
+        };
+
+        let validateMIME = function (file) {
+
+            if (plugin.settings.mimes.indexOf(file.type) < 0) {
+                alert(`The file "${file.name}" does not match with the accepted mime types: "${plugin.settings.mimes.join('", "')}"`);
+
+                return false;
+            }
+
+            return true;
+        };
+
+        let validateMaxSize = function (file) {
+
+            if (file.size > plugin.settings.maxSize) {
+                alert(`The file "${file.name}" exceeds the maximum size of ${plugin.settings.maxSize / 1024 / 1024}Mb`);
+
+                return false;
+            }
+
+            return true;
+
         };
 
         let setPreview = function ($container, files) {
@@ -244,7 +313,7 @@
                 dataTransfer.items.add(file);
 
                 // Set preview
-                $uploadedContainer.append(createImg(URL.createObjectURL(file), dataTransfer.items.length - 1));
+                $uploadedContainer.append(createImg(URL.createObjectURL(file), dataTransfer.items.length - 1), false);
 
             });
 

@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.0.0 - 15/07/2019
+/*! Image Uploader - v1.1.0 - 18/10/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 /* Base style */
@@ -83,6 +83,7 @@
     right: .2rem;
     border-radius: 50%;
     padding: .3rem;
+    line-height: 1;
     background-color: rgba(0, 0, 0, .5);
     -webkit-appearance: none;
     border: none;
@@ -93,6 +94,53 @@
 }
 
 .image-uploader .uploaded .uploaded-image .delete-image i {
+    display: block;
     color: #fff;
+    width: 1.4rem;
+    height: 1.4rem;
     font-size: 1.4rem;
+    line-height: 1.4rem;
+}
+
+@media screen and (max-width: 1366px) {
+    .image-uploader .uploaded .uploaded-image {
+        width: calc(20% - 1rem);
+        padding-bottom: calc(20% - 1rem);
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .image-uploader .uploaded {
+        padding: .4rem;
+    }
+
+    .image-uploader .uploaded .uploaded-image {
+        width: calc(25% - .8rem);
+        padding-bottom: calc(25% - .4rem);
+        margin: .4rem;
+    }
+}
+
+@media screen and (max-width: 786px) {
+    .image-uploader .uploaded {
+        padding: .3rem;
+    }
+
+    .image-uploader .uploaded .uploaded-image {
+        width: calc(33.3333333333% - .6rem);
+        padding-bottom: calc(33.3333333333% - .3rem);
+        margin: .3rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .image-uploader .uploaded {
+        padding: .2rem;
+    }
+
+    .image-uploader .uploaded .uploaded-image {
+        width: calc(50% - .4rem);
+        padding-bottom: calc(50% - .4rem);
+        margin: .2rem;
+    }
 }
