@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.1.0 - 18/10/2019
+/*! Image Uploader - v1.2.0 - 05/11/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
@@ -13,10 +13,8 @@
             label: 'Drag & Drop files here or click to browse',
             extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
             mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
-            maxSize: 2 * 1024 * 1024,
-            validateExtension: true,
-            validateMIME: true,
-            validateMaxSize: true,
+            maxSize: undefined,
+            maxFiles: undefined,
         };
 
         // Get instance
@@ -141,6 +139,7 @@
                 // Create the delete icon
                 $i = $('<i>', {class: 'material-icons', text: 'clear'}).appendTo($button);
 
+
             // If the image is preloaded
             if (preloaded) {
 
@@ -156,7 +155,7 @@
 
             } else {
 
-                // Set the identifier
+                // Set the index
                 $container.attr('data-index', id);
 
             }
@@ -174,13 +173,20 @@
                 prevent(e);
 
                 // If is not a preloaded image
-                if ($container.data('index') !== undefined) {
+                if ($container.data('preloaded') === true) {
+
+                    // Remove from preloaded array
+                    plugin.settings.preloaded = plugin.settings.preloaded.filter(function (p) {
+                        return p.id !== id;
+                    });
+
+                } else {
 
                     // Get the image index
                     let index = parseInt($container.data('index'));
 
                     // Update other indexes
-                    $container.find('.uploaded-image[data-index]').each(function (i, cont) {
+                    $container.parent().find('.uploaded-image[data-index]').each(function (i, cont) {
                         if (i > index) {
                             $(cont).attr('data-index', i - 1);
                         }
@@ -239,13 +245,16 @@
             // Run through the files
             $(files).each(function (i, file) {
                 // Run the validations
-                if (plugin.settings.validateExtension && !validateExtension(file)) {
+                if (plugin.settings.extensions && !validateExtension(file)) {
                     return;
                 }
-                if (plugin.settings.validateMIME && !validateMIME(file)) {
+                if (plugin.settings.mimes && !validateMIME(file)) {
                     return;
                 }
-                if (plugin.settings.validateMaxSize && !validateMaxSize(file)) {
+                if (plugin.settings.maxSize && !validateMaxSize(file)) {
+                    return;
+                }
+                if (plugin.settings.maxFiles && !validateMaxFiles(validFiles.length, file)) {
                     return;
                 }
                 validFiles.push(file);
@@ -287,6 +296,18 @@
 
             if (file.size > plugin.settings.maxSize) {
                 alert(`The file "${file.name}" exceeds the maximum size of ${plugin.settings.maxSize / 1024 / 1024}Mb`);
+
+                return false;
+            }
+
+            return true;
+
+        };
+
+        let validateMaxFiles = function (index, file) {
+
+            if ((index + dataTransfer.items.length + plugin.settings.preloaded.length) >= plugin.settings.maxFiles) {
+                alert(`The file "${file.name}" could not be added because the limit of ${plugin.settings.maxFiles} files was reached`);
 
                 return false;
             }

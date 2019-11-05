@@ -63,42 +63,28 @@ Type: `array`
 
 Default: `['.jpg', '.jpeg', '.png', '.gif', '.svg']`
 
-Array of strings with the allowed extensions. If the uploaded file does not have one of these extensions, an alert will appear and the image will not be sent.
-
-#### validateExtension
-Type: `boolean`
-
-Default: `true`
-
-Whether the extension of the file will be validated.
+Array of strings with the allowed extensions. Enabled by default. To disable this validation, set it as `undefined`. If the uploaded file does not have one of these extensions, an alert will appear and the image will not be sent.
 
 #### mimes
 Type: `array`
 
 Default: `['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml']`
 
-Array of strings with the allowed mime types. If the uploaded file does not have one of these mime types, an alert will appear and the image will not be sent.
-
-#### validateMIME
-Type: `boolean`
-
-Default: `true`
-
-Whether the mime type of the file will be validated.
+Array of strings with the allowed mime types. Enabled by default. To disable this validation, set it as `undefined`. If the uploaded file does not have one of these mime types, an alert will appear and the image will not be sent.
 
 #### maxSize
 Type: `int`
 
-Default: `2 * 1024 * 1024`
+Default: `undefined`
 
-Value of the maximum file size allowed in bytes. Default is 2 megabytes. If the uploaded file does have more then allowed, an alert will appear and the image will not be sent.
+Value of the maximum file size allowed in bytes. Disabled by default. For a maximum size of 2 megabytes, you can set this option as `2 * 1024 * 1024` bytes. If the uploaded file does have more then allowed, an alert will appear and the image will not be sent.
 
-#### validateMaxSize
-Type: `boolean`
+#### maxFiles
+Type: `int`
 
-Default: `true`
+Default: `undefined`
 
-Whether the maximum file size will be validated.
+Value of the maximum number of files allowed. Disabled by default. If the maximum number was reached, an alert will appear and the image will not be sent.
 
 ## License
 
