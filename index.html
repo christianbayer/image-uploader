@@ -426,6 +426,48 @@
             <p><strong>Default:</strong> <code>'preloaded'</code></p>
             <p>Name of the inputs that will be posted, containing the preloaded images identification.</p>
         </div>
+        <div class="option">
+            <h6>extensions</h6>
+            <p><strong>Type:</strong> <code>array</code></p>
+            <p><strong>Default:</strong> <code>['.jpg', '.jpeg', '.png', '.gif', '.svg']</code></p>
+            <p>Array of strings with the allowed extensions. If the uploaded file does not have one of these extensions, an alert will appear and the image will not be sent.</p>
+        </div>
+        <div class="option">
+            <h6>validateExtension</h6>
+            <p><strong>Type:</strong> <code>boolean</code></p>
+            <p><strong>Default:</strong> <code>true</code></p>
+            <p>Whether the extension of the file will be validated.</p>
+        </div>
+        <div class="option">
+            <h6>mimes</h6>
+            <p><strong>Type:</strong> <code>array</code></p>
+            <p><strong>Default:</strong> <code>['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml']</code></p>
+            <p>Array of strings with the allowed mime types. If the uploaded file does not have one of these mime types, an alert will appear and the image will not be sent.</p>
+        </div>
+        <div class="option">
+            <h6>preloadedInputName</h6>
+            <p><strong>Type:</strong> <code>string</code></p>
+            <p><strong>Default:</strong> <code>'preloaded'</code></p>
+            <p>Name of the inputs that will be posted, containing the preloaded images identification.</p>
+        </div>
+        <div class="option">
+            <h6>validateMIME</h6>
+            <p><strong>Type:</strong> <code>boolean</code></p>
+            <p><strong>Default:</strong> <code>true</code></p>
+            <p>Whether the mime type of the file will be validated.</p>
+        </div>
+        <div class="option">
+            <h6>maxSize</h6>
+            <p><strong>Type:</strong> <code>int</code></p>
+            <p><strong>Default:</strong> <code>2 * 1024 * 1024</code></p>
+            <p>Value of the maximum file size allowed in bytes. Default is 2 megabytes. If the uploaded file does have more then allowed, an alert will appear and the image will not be sent.</p>
+        </div>
+        <div class="option">
+            <h6>validateMaxSize</h6>
+            <p><strong>Type:</strong> <code>boolean</code></p>
+            <p><strong>Default:</strong> <code>true</code></p>
+            <p>Whether the maximum file size will be validated.</p>
+        </div>
 
         <h4 id="example-1"><a href="#example-1"># Example 1
             <small>- basic usage</small>

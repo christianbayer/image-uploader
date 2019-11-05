@@ -51,12 +51,54 @@ Default: `'images'`
 
 Name of the input that will be posted, containing the files list.
 
-#### preloaded
+#### preloadedInputName
 Type: `string`
 
 Default: `'preloaded'`
 
 Name of the inputs that will be posted, containing the preloaded images identification.
+
+#### extensions
+Type: `array`
+
+Default: `['.jpg', '.jpeg', '.png', '.gif', '.svg']`
+
+Array of strings with the allowed extensions. If the uploaded file does not have one of these extensions, an alert will appear and the image will not be sent.
+
+#### validateExtension
+Type: `boolean`
+
+Default: `true`
+
+Whether the extension of the file will be validated.
+
+#### mimes
+Type: `array`
+
+Default: `['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml']`
+
+Array of strings with the allowed mime types. If the uploaded file does not have one of these mime types, an alert will appear and the image will not be sent.
+
+#### validateMIME
+Type: `boolean`
+
+Default: `true`
+
+Whether the mime type of the file will be validated.
+
+#### maxSize
+Type: `int`
+
+Default: `2 * 1024 * 1024`
+
+Value of the maximum file size allowed in bytes. Default is 2 megabytes. If the uploaded file does have more then allowed, an alert will appear and the image will not be sent.
+
+#### validateMaxSize
+Type: `boolean`
+
+Default: `true`
+
+Whether the maximum file size will be validated.
 
 ## License
 
