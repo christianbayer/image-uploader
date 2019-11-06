@@ -5,9 +5,8 @@ Image-Uploader is a simple jQuery Drag & Drop Image Uploader plugin made to be u
 [Demo page here](https://christianbayer.github.io/image-uploader/)
 
 ## How to use it
-Import the CSS file at the `<head>` along Material Icons for the icons:
+Import the CSS file at the `<head>`:
 ```
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link type="text/css" rel="stylesheet" href="http://example.com/image-uploader.min.css">
 ```
 Import the JS file at the end of the `<body>`, after the jQuery:
