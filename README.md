@@ -1,5 +1,5 @@
 # Image-Uploader
-Image-Uploader is a simple jQuery Drag & Drop Image Uploader plugin made to be used in forms, withot AJAX.
+Image-Uploader is a simple jQuery Drag & Drop Image Uploader plugin made to be used in forms, without AJAX.
 
 ## Demo
 [Demo page here](https://christianbayer.github.io/image-uploader/)
