@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.2.1 - 06/11/2019
+/*! Image Uploader - v1.2.2 - 06/11/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
@@ -172,6 +172,9 @@
                 // Prevent browser default event and stop propagation
                 prevent(e);
 
+                // Get the parent element
+                let $parent = $container.parent();
+
                 // If is not a preloaded image
                 if ($container.data('preloaded') === true) {
 
@@ -186,7 +189,7 @@
                     let index = parseInt($container.data('index'));
 
                     // Update other indexes
-                    $container.parent().find('.uploaded-image[data-index]').each(function (i, cont) {
+                    $parent.find('.uploaded-image[data-index]').each(function (i, cont) {
                         if (i > index) {
                             $(cont).attr('data-index', i - 1);
                         }
@@ -203,10 +206,10 @@
                 $container.remove();
 
                 // If there is no more uploaded files
-                if (!$container.find('.uploaded-image').length) {
+                if (!$parent.children().length) {
 
                     // Remove the 'has-files' class
-                    $container.removeClass('has-files');
+                    $parent.parent().removeClass('has-files');
 
                 }
 
