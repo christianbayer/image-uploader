@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.2.0 - 05/11/2019
+/*! Image Uploader - v1.2.1 - 06/11/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
@@ -92,7 +92,7 @@
                 }).appendTo($container),
 
                 // Create the icon and append it to the text container
-                $i = $('<i>', {class: 'material-icons', text: 'cloud_upload'}).appendTo($textContainer),
+                $i = $('<i>', {class: 'iui-cloud-upload'}).appendTo($textContainer),
 
                 // Create the text and append it to the text container
                 $span = $('<span>', {text: plugin.settings.label}).appendTo($textContainer);
@@ -137,7 +137,7 @@
                 $button = $('<button>', {class: 'delete-image'}).appendTo($container),
 
                 // Create the delete icon
-                $i = $('<i>', {class: 'material-icons', text: 'clear'}).appendTo($button);
+                $i = $('<i>', {class: 'iui-close'}).appendTo($button);
 
 
             // If the image is preloaded
