@@ -1,4 +1,4 @@
-/*! Image Uploader - v1.2.2 - 06/11/2019
+/*! Image Uploader - v1.2.3 - 26/11/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
@@ -270,6 +270,11 @@
 
                 // Makes the upload
                 setPreview($container, validFiles);
+            } else {
+
+                // Update input files (it is now empty due to a default browser action)
+                $input.prop('files', dataTransfer.files);
+
             }
         };
 
