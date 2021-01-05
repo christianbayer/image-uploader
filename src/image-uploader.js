@@ -99,7 +99,7 @@ https://github.com/christianbayer/image-uploader
         let createContainer = function () {
 
             // Create the image uploader container
-            let $container = $('<div>', {class: 'image-uploader'});
+            let $container = $('<div>', { class: 'image-uploader' });
 
             // Create the input type file and append it to the container
             $input = $('<input>', {
@@ -111,7 +111,7 @@ https://github.com/christianbayer/image-uploader
             }).appendTo($container);
 
             // Create the uploaded images container and append it to the container
-            let $uploadedContainer = $('<div>', {class: 'uploaded'}).appendTo($container),
+            let $uploadedContainer = $('<div>', { class: 'uploaded' }).appendTo($container),
 
                 // Create the text container and append it to the container
                 $textContainer = $('<div>', {
@@ -119,10 +119,10 @@ https://github.com/christianbayer/image-uploader
                 }).appendTo($container),
 
                 // Create the icon and append it to the text container
-                $i = $('<i>', {class: 'iui-cloud-upload'}).appendTo($textContainer),
+                $i = $('<i>', { class: 'iui-cloud-upload' }).appendTo($textContainer),
 
                 // Create the text and append it to the text container
-                $span = $('<span>', {text: plugin.settings.label}).appendTo($textContainer);
+                $span = $('<span>', { text: plugin.settings.label }).appendTo($textContainer);
 
 
             // Listen to container click and trigger input file click
@@ -159,16 +159,16 @@ https://github.com/christianbayer/image-uploader
         let createImg = function (src, id, preloaded) {
 
             // Create the upladed image container
-            let $container = $('<div>', {class: 'uploaded-image'}),
+            let $container = $('<div>', { class: 'uploaded-image' }),
 
                 // Create the img tag
-                $img = $('<img>', {src: src}).appendTo($container),
+                $img = $('<img>', { src: src }).appendTo($container),
 
                 // Create the delete button
-                $button = $('<button>', {class: 'delete-image'}).appendTo($container),
+                $button = $('<button>', { class: 'delete-image' }).appendTo($container),
 
                 // Create the delete icon
-                $i = $('<i>', {class: 'iui-close'}).appendTo($button);
+                $i = $('<i>', { class: 'iui-close' }).appendTo($button);
 
 
             // If the image is preloaded
