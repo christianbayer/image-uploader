@@ -1,7 +1,11 @@
 /*! Image Uploader - v1.2.3 - 26/11/2019
+
+https://github.com/christianbayer/image-uploader
+
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
+
 
     $.fn.imageUploader = function (options) {
 
@@ -17,11 +21,34 @@
             maxFiles: undefined,
         };
 
+        let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
         // Get instance
         let plugin = this;
 
+        let dataTransfer = {}
         // Will keep the files
-        let dataTransfer = new DataTransfer();
+
+        if (!isSafari) {
+            dataTransfer = new DataTransfer()
+        } else {
+            let Items = {
+                list: [],
+                remove: function (index) {
+                    delete this.list[index]
+                },
+                add: function (value) {
+                    return this.list.push(value)
+                }
+            }
+
+            dataTransfer = {
+                polyfill: true,
+                files: Items.list,
+                items: Items
+            }
+
+        }
 
         // The file input
         let $input;
@@ -72,7 +99,7 @@
         let createContainer = function () {
 
             // Create the image uploader container
-            let $container = $('<div>', {class: 'image-uploader'});
+            let $container = $('<div>', { class: 'image-uploader' });
 
             // Create the input type file and append it to the container
             $input = $('<input>', {
@@ -84,7 +111,7 @@
             }).appendTo($container);
 
             // Create the uploaded images container and append it to the container
-            let $uploadedContainer = $('<div>', {class: 'uploaded'}).appendTo($container),
+            let $uploadedContainer = $('<div>', { class: 'uploaded' }).appendTo($container),
 
                 // Create the text container and append it to the container
                 $textContainer = $('<div>', {
@@ -92,10 +119,10 @@
                 }).appendTo($container),
 
                 // Create the icon and append it to the text container
-                $i = $('<i>', {class: 'iui-cloud-upload'}).appendTo($textContainer),
+                $i = $('<i>', { class: 'iui-cloud-upload' }).appendTo($textContainer),
 
                 // Create the text and append it to the text container
-                $span = $('<span>', {text: plugin.settings.label}).appendTo($textContainer);
+                $span = $('<span>', { text: plugin.settings.label }).appendTo($textContainer);
 
 
             // Listen to container click and trigger input file click
@@ -115,6 +142,10 @@
             // Listen to input files changed
             $input.on('change', fileSelectHandler.bind($container));
 
+            if (typeof dataTransfer.polyfill !== 'undefined') {
+                dataTransfer.files = $input.files
+            }
+
             return $container;
         };
 
@@ -128,16 +159,16 @@
         let createImg = function (src, id, preloaded) {
 
             // Create the upladed image container
-            let $container = $('<div>', {class: 'uploaded-image'}),
+            let $container = $('<div>', { class: 'uploaded-image' }),
 
                 // Create the img tag
-                $img = $('<img>', {src: src}).appendTo($container),
+                $img = $('<img>', { src: src }).appendTo($container),
 
                 // Create the delete button
-                $button = $('<button>', {class: 'delete-image'}).appendTo($container),
+                $button = $('<button>', { class: 'delete-image' }).appendTo($container),
 
                 // Create the delete icon
-                $i = $('<i>', {class: 'iui-close'}).appendTo($button);
+                $i = $('<i>', { class: 'iui-close' }).appendTo($button);
 
 
             // If the image is preloaded
