@@ -1,7 +1,11 @@
 /*! Image Uploader - v1.2.3 - 26/11/2019
+
+https://github.com/christianbayer/image-uploader
+
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {
+
 
     $.fn.imageUploader = function (options) {
 
@@ -17,11 +21,34 @@
             maxFiles: undefined,
         };
 
+        let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
         // Get instance
         let plugin = this;
 
+        let dataTransfer = {}
         // Will keep the files
-        let dataTransfer = new DataTransfer();
+
+        if (!isSafari) {
+            dataTransfer = new DataTransfer()
+        } else {
+            let Items = {
+                list: [],
+                remove: function (index) {
+                    delete this.list[index]
+                },
+                add: function (value) {
+                    return this.list.push(value)
+                }
+            }
+
+            dataTransfer = {
+                polyfill: true,
+                files: Items.list,
+                items: Items
+            }
+
+        }
 
         // The file input
         let $input;
@@ -114,6 +141,10 @@
 
             // Listen to input files changed
             $input.on('change', fileSelectHandler.bind($container));
+
+            if (typeof dataTransfer.polyfill !== 'undefined') {
+                dataTransfer.files = $input.files
+            }
 
             return $container;
         };
